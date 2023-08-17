@@ -1,0 +1,66 @@
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-decoration: none;
+  font-family: Roboto;
+  outline:none;
+}
+
+
+.App {
+  .header {
+    padding: 32px;
+    display: flex;
+    justify-content: space-between;
+
+    h1 {
+      color: #424242;
+      font-size: 24px;
+      font-weight: 600;
+    }
+    .goOut {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      span {
+        display: inline;
+        margin-right: 12px;
+      }
+    }
+  }
+
+  .Home {
+    background-color: #F4F4F4;
+    padding-bottom: 30px;
+  }
+
+  .Auth {
+    background: url(../public/Rectangle.png) center/cover fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0; /* Убираем отступы */
+    height: 100vh; /* Высота веб-страницы */
+    backdrop-filter: blur(4px);
+  }
+
+
+  .container {
+    width: 1048px;
+    margin: 0 auto;
+    display: flex;
+    // justify-content: space-evenly;
+  }
+}
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

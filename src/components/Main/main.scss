@@ -1,0 +1,37 @@
+.main {
+  width: 600px;
+  margin-left: 24px;
+  display: inline-block;
+  border-radius: 16px;
+  background: #FFF;
+  box-shadow: 0px 4px 33px 0px rgba(0, 0, 0, 0.04);
+  padding: 48px 32px;
+
+  &_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    ul {
+      li {
+        display: inline-block;
+        color: #424242;
+        font-size: 32px;
+        font-weight: 500;
+        margin-right: 20px;
+      }
+    }
+    span {
+      color: #41522E;
+      font-size: 24px;
+      font-weight: 400;
+    }
+  }
+
+  &_slide {
+    margin-top: 28px;
+  }
+
+  &_favoritesCount {
+    margin-top: 28px;
+  }
+}
