@@ -14,19 +14,24 @@ function Home ({setIsLogged}) {
 
   const navigate = useNavigate()
 
-  const [location, setLocation] = React.useState('новосибирск')
+  const [location, setLocation] = React.useState('Москва')
   const [listsHotels, setListsHotels] = React.useState([])
 
   const [favorites, setFavorites] = React.useState([])
 
+  async function fetchData() {
+    const { data: { results } } = await axios.get(
+      `http://engine.hotellook.com/api/v2/lookup.json?query=${location.toLowerCase()}&lang=ru&lookFor=both&limit=3`);
+    setListsHotels(results.hotels.map((hotel) => ({
+      ...hotel, isFavorite: false
+    })))
+  }
   React.useEffect(() => {
-    async function fetchData() {
-      const { data: { results } } = await axios.get(
-        `http://engine.hotellook.com/api/v2/lookup.json?query=${location.toLowerCase()}&lang=ru&lookFor=both&limit=3`);
-      setListsHotels(results.hotels.map((hotel) => ({
-        ...hotel, isFavorite: false
-      })))
+    const makeUniq = (arr) => {
+      return arr.filter((el, id) => arr.indexOf(el) !== id);
     }
+    makeUniq(favorites);
+    
     fetchData();
   }, [])
 
@@ -37,13 +42,19 @@ function Home ({setIsLogged}) {
         ...prev, isFavorite: !prev.isFavorite
       } : prev)
       setListsHotels(hotels)
-      setFavorites(...hotels, hotels.filter((favEl) => favEl.isFavorite === true))
+      setFavorites( makeUniq([...favorites, ...hotels.filter((favEl) => favEl.isFavorite === true)]))
       console.log(listsHotels)
       console.log(el)
     } catch (error) {
       alert('error')
     }
   }
+
+  const makeUniq = (arr) => {
+    return arr.filter((el, id) => arr.indexOf(el) === id);
+  }
+  
+ 
 
 
   const onSearch = async () => {
@@ -72,6 +83,7 @@ function Home ({setIsLogged}) {
           <LocationFilter 
             setLocation={setLocation}
             location={location}
+            fetchData={fetchData}
             />
           <Favorites 
             favorites={favorites} 

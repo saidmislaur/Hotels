@@ -2,13 +2,13 @@ import React from 'react'
 
 import "./aside.scss"
 
-const LocationFilter = ({setLocation, location}) => {
+const LocationFilter = ({setLocation, location, fetchData}) => {
 
   // const [value, setValue] = React.useState('')
 
   const onSearch = (e) => {
     e.preventDefault()
-    alert(location)
+    fetchData()
   }
   return (
     <div className='locationFilter'>
