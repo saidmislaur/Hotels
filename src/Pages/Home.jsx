@@ -42,8 +42,9 @@ function Home ({setIsLogged}) {
         ...prev, isFavorite: !prev.isFavorite
       } : prev)
       setListsHotels(hotels)
-      setFavorites( makeUniq([...favorites, ...hotels.filter((favEl) => favEl.isFavorite === true)]))
+      setFavorites(makeUniq(favorites.find((fav) => fav.id === el.id) ? favorites.filter((favEl) => favEl.id !== el.id) : [{...el, isFavorite: true} , ...favorites]))
       console.log(listsHotels)
+      console.log(favorites)
       console.log(el)
     } catch (error) {
       alert('error')
@@ -53,13 +54,6 @@ function Home ({setIsLogged}) {
   const makeUniq = (arr) => {
     return arr.filter((el, id) => arr.indexOf(el) === id);
   }
-  
- 
-
-
-  const onSearch = async () => {
-    alert('ok')
-  } 
 
 
   const logout = () => {
@@ -91,6 +85,7 @@ function Home ({setIsLogged}) {
           />
         </div>
         <Main 
+          location={location}
           hotels={listsHotels} 
           onAddFavorite={onAddFavorite} 
           favorites={favorites}

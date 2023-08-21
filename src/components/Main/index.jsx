@@ -4,7 +4,7 @@ import "./main.scss"
 
 import Card from '../Card/Card'
 import Slide from '../Slide'
-const Main = ({hotels, onAddFavorite, favorites}) => {
+const Main = ({hotels, onAddFavorite, favorites, location}) => {
 
   console.log(favorites)
 
@@ -12,8 +12,8 @@ const Main = ({hotels, onAddFavorite, favorites}) => {
     <div className='main'>
       <div className="main_header">
         <ul>
-          <li>Отель</li>
-          <li>Москва</li>
+          <li>{`Отель >`} </li>
+          <li>{location}</li>
         </ul>
         <span>07 июля 2020</span>
       </div>
