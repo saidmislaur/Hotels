@@ -4,9 +4,8 @@ import "./card.scss"
 
 const Card = ({label, onAddFavorite, img, id, isFavorite}) => {
 
-  const [isLike, setIsLike] = React.useState(false)
 
-  const obj = {id, parentId: id, label}
+  const obj = {id: id, label}
 
   const onLikeAdd = () => {
     onAddFavorite(obj)

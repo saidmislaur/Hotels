@@ -29,9 +29,9 @@ const Favorites = ({favorites, onAddFavorite}) => {
         {favorites && favorites.map((items) => (
           <Card 
             {...items}
-            key={items.label}
-            favorited={true}
+            key={items.id}
             img={false} 
+            id={items.id}
             onAddFavorite={(el) => onAddFavorite(el)}
             favorites={favorites}
           />

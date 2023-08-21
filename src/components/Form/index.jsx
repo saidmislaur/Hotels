@@ -1,6 +1,6 @@
 import React from 'react'
 
-import  {useNavigate}  from 'react-router-dom'
+
 
 import './form.scss'
 
@@ -13,7 +13,6 @@ const Form = ({setIsLogged}) => {
   const [passwordError, setPasswordError] = React.useState('')
   const [formValid, setFormValid] = React.useState(false)
 
-  const navigate = useNavigate()
 
   React.useEffect(() => {
     if(emailError || passwordError) {
@@ -28,7 +27,6 @@ const Form = ({setIsLogged}) => {
 
     localStorage.setItem('isLogged', true)
     setIsLogged(true)
-    // navigate('/')
   }
   
   const emailHandler = (e) => {

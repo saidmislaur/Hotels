@@ -4,9 +4,9 @@ import "./main.scss"
 
 import Card from '../Card/Card'
 import Slide from '../Slide'
-const Main = ({hotels, onAddFavorite, like, favorites}) => {
+const Main = ({hotels, onAddFavorite, favorites}) => {
 
-  console.log(like)
+  console.log(favorites)
 
   return (
     <div className='main'>
@@ -21,17 +21,16 @@ const Main = ({hotels, onAddFavorite, like, favorites}) => {
       <Slide />
       </div>
       <div className="main_favoritesCount">
-        <span>Добавлено в Избранное:<b>3</b>отеля</span>
+        <span>Добавлено в Избранное:<b>{favorites.length}</b>отеля</span>
       </div>
       <>
         {hotels.map((items) => (
           <Card 
             key={items.id}
-            id={items.id} 
+            id={items.id}
             {...items}
             img={true}
             onAddFavorite={(el) => onAddFavorite(el)}
-            onLike={like}
             favorites={favorites}
           />
         ))}

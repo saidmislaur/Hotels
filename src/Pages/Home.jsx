@@ -14,7 +14,7 @@ function Home ({setIsLogged}) {
 
   const navigate = useNavigate()
 
-  const [listsLocations, setListsLocations] = React.useState([])
+  const [location, setLocation] = React.useState('новосибирск')
   const [listsHotels, setListsHotels] = React.useState([])
 
   const [favorites, setFavorites] = React.useState([])
@@ -22,8 +22,7 @@ function Home ({setIsLogged}) {
   React.useEffect(() => {
     async function fetchData() {
       const { data: { results } } = await axios.get(
-        'http://engine.hotellook.com/api/v2/lookup.json?query=москва&lang=ru&lookFor=both&limit=3');
-      setListsLocations(results.locations)
+        `http://engine.hotellook.com/api/v2/lookup.json?query=${location.toLowerCase()}&lang=ru&lookFor=both&limit=3`);
       setListsHotels(results.hotels.map((hotel) => ({
         ...hotel, isFavorite: false
       })))
@@ -31,17 +30,26 @@ function Home ({setIsLogged}) {
     fetchData();
   }, [])
 
+  
   const onAddFavorite = async (el) => {
     try {
-      const hotels = listsHotels.map((prev) => prev.id == el.id ? {
+      const hotels = listsHotels.map((prev) => Number(prev.id) === Number(el.id) ? {
         ...prev, isFavorite: !prev.isFavorite
-      } : prev) 
+      } : prev)
       setListsHotels(hotels)
-      setFavorites(hotels.filter((favEl) => favEl.isFavorite === true))
+      setFavorites(...hotels, hotels.filter((favEl) => favEl.isFavorite === true))
+      console.log(listsHotels)
+      console.log(el)
     } catch (error) {
       alert('error')
     }
   }
+
+
+  const onSearch = async () => {
+    alert('ok')
+  } 
+
 
   const logout = () => {
     localStorage.removeItem("isLogged");
@@ -61,7 +69,10 @@ function Home ({setIsLogged}) {
       </header>
       <div className="container">
         <div className="aside">
-          <LocationFilter />
+          <LocationFilter 
+            setLocation={setLocation}
+            location={location}
+            />
           <Favorites 
             favorites={favorites} 
             onAddFavorite={onAddFavorite} 
